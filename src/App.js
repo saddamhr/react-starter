@@ -12,19 +12,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
-import { Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import './App.css'
+import './App.css';
 
+import style from './App.module.css';
+import { Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,32 +79,16 @@ function App(props) {
   const classes = useStyles();
 
   return (
-    //  <div>
-    //    <Router>
-    //     <div>
-    //       <Switch>
-    //         <Route path="/users" component={Users} />
-    //         <Route path="/" component={Home} />
-    //       </Switch>
-    //     </div>
-    //   </Router>
-
-    //  </div>
-
     <Router>
       <React.Fragment>
         <CssBaseline />
-
         <AppBar>
           <Toolbar>
-            {/* <Typography variant="h6">Company Logo</Typography> */}
-            <NavLink exact to="/" color="inherit">
+            <NavLink className={style.nav_menu} exact to="/" color="inherit">
               Company Logo
             </NavLink>
-
-            <div className={classes.grow} />
-
-            <NavLink to="/users" color="inherit">
+            <Box className={classes.grow}></Box>
+            <NavLink className={style.nav_menu} to="/users" color="inherit">
               Users
             </NavLink>
           </Toolbar>
@@ -117,16 +99,6 @@ function App(props) {
             <Route path="/users" component={Users} />
             <Route exact path="/" component={Home} />
           </Switch>
-          {/* <Box my={2}>
-            {[...new Array(12)]
-              .map(
-                () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
-              )
-              .join('\n')}
-          </Box> */}
         </Container>
         <ScrollTop {...props}>
           <Fab color="secondary" size="small" aria-label="scroll back to top">
