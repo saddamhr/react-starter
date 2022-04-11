@@ -1,28 +1,26 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  NavLink,
-} from 'react-router-dom';
-
-import Users from './components/Users/Users';
-import Home from './components/Home/Home';
-
 import React from 'react';
-import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Container from '@material-ui/core/Container';
-import Fab from '@material-ui/core/Fab';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import Zoom from '@material-ui/core/Zoom';
-import './App.css';
 
-import style from './App.module.css';
-import { Box } from '@material-ui/core';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import Users from './pages/Users/Users';
+import Home from './pages/Home/Home';
+import NavMenu from './components/NavMenu/NavMenu';
+
+import PropTypes from 'prop-types';
+
+import {
+  Toolbar,
+  makeStyles,
+  CssBaseline,
+  useScrollTrigger,
+  Container,
+  Fab,
+  // KeyboardArrowUpIcon,
+  Zoom,
+} from '@material-ui/core';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+
+import './App.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,17 +80,8 @@ function App(props) {
     <Router>
       <React.Fragment>
         <CssBaseline />
-        <AppBar>
-          <Toolbar>
-            <NavLink className={style.nav_menu} exact to="/" color="inherit">
-              Company Logo
-            </NavLink>
-            <Box className={classes.grow}></Box>
-            <NavLink className={style.nav_menu} to="/users" color="inherit">
-              Users
-            </NavLink>
-          </Toolbar>
-        </AppBar>
+        <NavMenu />
+
         <Toolbar id="back-to-top-anchor" />
         <Container>
           <Switch>
