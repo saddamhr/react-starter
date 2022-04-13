@@ -1,239 +1,75 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+import axios from 'axios';
+
+import { Box, CircularProgress } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/styles';
+
+import User from '../../components/User/User';
+
+const useStyles = makeStyles({
+  usersContainer: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill,minmax(200px,2fr))',
+    gap: '1.5vw',
+    margin: '1rem',
+  },
+  loaderContainer: {
+    height: '75vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  errorContainer: {
+    marginTop: '1rem',
+  },
+});
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 const Users = () => {
+  const classes = useStyles();
+
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const url = 'https://jsonplaceholder.typicode.com/users';
+    axios
+      .get(url)
+      .then((_res) => {
+        setUsers(_res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error.message);
+        setLoading(false);
+      });
+  }, []);
+
   return (
-    <div>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora
-      veritatis sed molestias quis commodi in? Libero, eos voluptas voluptatem
-      laboriosam at laudantium quibusdam possimus reprehenderit cumque earum
-      eveniet quaerat dolorum excepturi aspernatur sunt, quia repudiandae
-      maiores nam necessitatibus magni? Nostrum obcaecati optio voluptatibus
-      ipsa porro deleniti veritatis asperiores. Sit possimus, suscipit molestias
-      sapiente voluptate quas nulla harum pariatur dolores sequi illo odit nihil
-      cum delectus vero incidunt dolorem neque dolore quisquam expedita
-      dignissimos consequuntur hic repellat. Labore molestiae, harum facilis
-      iusto mollitia quos et aspernatur officiis, nostrum voluptatem facere modi
-      tempora earum totam a deleniti aperiam libero aut? Quas.
-    </div>
+    <React.Fragment>
+      {loading && (
+        <Box className={classes.loaderContainer}>
+          <CircularProgress disableShrink />
+        </Box>
+      )}
+      {error !== '' && (
+        <Box className={classes.errorContainer}>
+          <Alert severity="error">{error}</Alert>
+        </Box>
+      )}
+      {error === '' && (
+        <Box className={classes.usersContainer}>
+          {users.map((user) => (
+            <User user={user}></User>
+          ))}
+        </Box>
+      )}
+    </React.Fragment>
   );
 };
 
